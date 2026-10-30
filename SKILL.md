@@ -66,6 +66,7 @@ First-time install lives in `install.md` (clone, deps, ffmpeg, skill registratio
 - `yt-dlp`, HyperFrames, Remotion, Manim installed only on first use.
 - First-use animation setup happens inside the slot directory, never at the video-use repo root. HyperFrames can be invoked with `npx --yes hyperframes ...`; Remotion can be scaffolded with `npx create-video@latest` or installed as a project-local dependency before using its `remotion render` command.
 - This skill vendors `skills/manim-video/`. Read its SKILL.md when building a Manim slot.
+- This skill vendors `skills/instagram-agent/` (13 `ig-*` skills, MIT, from [Jakeschincariol/instagram-agent-skill](https://github.com/Jakeschincariol/instagram-agent-skill)). When the deliverable is an Instagram Reel, read `skills/instagram-agent/skills/ig-reel/SKILL.md` for hooks, beat timing and the on-screen safe zone; use `ig-repurpose` to pick standalone clips from long footage, and `ig-caption` / `ig-human` for the post copy. Those skills write; they never post.
 
 Helpers (`helpers/transcribe.py`, `helpers/render.py`, etc.) live alongside this SKILL.md. Resolve their paths relative to the directory containing this file — the skill is typically symlinked at `~/.claude/skills/video-use/` or `~/.codex/skills/video-use/`.
 
@@ -281,7 +282,7 @@ Sound is where generated videos sound cheap. Worked rules from launch edits:
 
 ## Output spec
 
-Match the source unless the user asked for something specific. Common targets: `1920×1080@24` cinematic, `1920×1080@30` screen content, `1080×1920@30` vertical social, `3840×2160@24` 4K cinema, `1080×1080@30` square. `render.py` defaults the scale to 1080p from any source; pass `--filter` or edit the extract command for other targets. Worth asking the user which delivery format matters.
+Match the source unless the user asked for something specific. Common targets: `1920×1080@24` cinematic, `1920×1080@30` screen content, `1080×1920@30` vertical social (for Reels keep text and burned captions inside y=230–1440 and clear of the right 230px — the app UI covers the rest; see `ig-reel`), `3840×2160@24` 4K cinema, `1080×1080@30` square. `render.py` defaults the scale to 1080p from any source; pass `--filter` or edit the extract command for other targets. Worth asking the user which delivery format matters.
 
 ## EDL format
 

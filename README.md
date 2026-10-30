@@ -68,6 +68,12 @@ cp .env.example .env
 $EDITOR .env                    # ELEVENLABS_API_KEY=...
 ```
 
+Optional — editing for Instagram? The vendored [`skills/instagram-agent/`](skills/instagram-agent/) pack (`/ig-reel`, `/ig-caption`, `/ig-repurpose`, …) writes hooks, timed beat sheets and captions for the cut. Register its skills individually:
+
+```bash
+for d in ~/Developer/video-use/skills/instagram-agent/skills/ig-*; do ln -sfn "$d" ~/.claude/skills/; done
+```
+
 ## How it works
 
 The LLM never watches the video. It **reads** it — through two layers that together give it everything it needs to cut with word-boundary precision.
